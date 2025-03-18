@@ -530,7 +530,7 @@ const MainPage = () => {
                     <span className="menu-text">Accounts</span>
                   </a>
                   <ul className="treeview-menu">
-                    <li><NavLink to={"/invoice"}>Transaction</NavLink></li>
+                    <li><NavLink to={"/transaction"}>Transaction</NavLink></li>
                     <li><NavLink to={"/journal"}>Journal</NavLink></li>
                     <li>
                       <NavLink to={"/invoice"}>Invoice</NavLink>

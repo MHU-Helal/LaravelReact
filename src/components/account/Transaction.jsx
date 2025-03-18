@@ -1,40 +1,24 @@
 import axios, { Axios } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Journal = () => {
+const Transaction = () => {
   console.clear();
+    const [accounts, setAccounts] = useState([{
 
-  // let accounts = []
+  }]);
 
-  axios.get('http://localhost/LaravelTeamProject/public/api/accounts')
-  .then(resp=>{
-    console.clear()
-    console.log(resp.data[0]);
-    // accounts = resp.data;
-  })
-  .catch(error=>{
-    console.log(error);    
-  })
+  useEffect(() => {
+    axios.get('http://localhost/LaravelTeamProject/public/api/accounts')
+      .then(resp => {
+        console.clear();
+        // console.log(resp.data);
+        setAccounts(resp.data);  // Correctly updating the state
+      })
+      .catch(error => {
+        console.error("There was an error fetching the accounts:", error);
+      });
+  }, []); // Empty dependency array ensures this runs only once, like componentDidMount.
 
-  const [accounts, setAccounts] = useState({
-    code: "",
-    name: "",
-    description: "",
-  });
-
-
-  // let accounts = [{
-  //   voucher_ref: "",
-  //   transaction_date: "",
-  //   account_id: "",
-  //   description: "",
-  //   debit: "",
-  //   credit: "",
-  //   transaction_against_id: "",
-  //   t_a_description: "",
-  //   t_a_debit: "",
-  //   t_a_credit: "",
-  // }];
 
   const [formData, setFormData] = useState({
     voucher_ref: "",
@@ -60,11 +44,29 @@ const Journal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios.post('http://localhost/LaravelTeamProject/public/api/transactions', formData, {
+      headers:{
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => {
+      console.log('Response:', response.data);
+      // You can handle success here (e.g., show a success message)
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // You can handle errors here (e.g., show an error message)
+    });
+    
+    // console.log(formData);
+    
+
     // Handle form submission logic (e.g., send data to API)
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <form onSubmit={handleSubmit} method="post" encType="multipart/form-data">
       <div className="row mb-3">
         <label htmlFor="voucher_ref" className="col-sm-2 col-form-label">
           Voucher Ref
@@ -221,4 +223,4 @@ const Journal = () => {
   );
 };
 
-export default Journal;
+export default Transaction;
