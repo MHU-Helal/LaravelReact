@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Journals = () => {
   const [transactions, setTransactions] = useState([]);
@@ -7,17 +7,23 @@ const Journals = () => {
   const [error, setError] = useState(null);
 
   // Fetch transactions from API
+  console.clear();
   useEffect(() => {
-    axios.get('http://localhost/LaravelTeamProject/public/api/journal') // Adjust the URL based on your API
+    axios
+      .get("http://localhost/LaravelTeamProject/public/api/journal") // Adjust the URL based on your API
       .then((response) => {
         setTransactions(response.data);
+        console.log(transactions);
+
         setLoading(false);
       })
       .catch((err) => {
-        setError('Failed to load data');
+        setError(err);
         setLoading(false);
       });
   }, []);
+
+  console.log(transactions);
 
   // If loading or error, display a message
   if (loading) {
@@ -34,14 +40,12 @@ const Journals = () => {
 
       {/* Transactions Table */}
       <div className="table-responsive">
-        <table className="table table-bordered table-striped">
+        <table className="table table-bordered table-striped table-dark text-center rounded">
           <thead>
             <tr>
-              <th>Voucher Ref</th>
-              <th>Transaction Date</th>
-              <th>Account ID</th>
+              <th className="w-25">Transaction Date</th>
+              <th>Account</th>
               <th>Description</th>
-              <th>Transaction Against</th>
               <th>Debit</th>
               <th>Credit</th>
             </tr>
@@ -49,16 +53,41 @@ const Journals = () => {
           <tbody>
             {transactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td>{transaction.voucher_ref}</td>
-                <td>{transaction.transaction_date}</td>
-                <td>{transaction.account_id}</td>
-                <td>{transaction.description}</td>
-                <td>{transaction.transaction_against}</td>
-                <td>{transaction.debit}</td>
-                <td>{transaction.credit}</td>
+                <td className="text-center">{transaction.transaction_date}</td>
+                <td className="text-start">{transaction.account.name}</td>
+                <td className="text-start">{transaction.description}</td>
+                <td className="text-end">{transaction.debit>0? transaction.debit: ""}</td>
+                <td className="text-end">{transaction.credit>0? transaction.credit: ""}</td>
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={3} className="text-end fw-bold">
+                Balance
+              </td>
+              <td className="text-end fw-bold">
+                {/* Ensure debit is a number */}
+                {transactions
+                  .reduce(
+                    (acc, transaction) =>
+                      acc + (Number(transaction.debit) || 0),
+                    0
+                  )
+                  .toFixed(2)}
+              </td>
+              <td className="text-end fw-bold">
+                {/* Ensure credit is a number */}
+                {transactions
+                  .reduce(
+                    (acc, transaction) =>
+                      acc + (Number(transaction.credit) || 0),
+                    0
+                  )
+                  .toFixed(2)}
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
