@@ -56,8 +56,8 @@ const Journals = () => {
                 <td className="text-center">{transaction.transaction_date}</td>
                 <td className="text-start">{transaction.account.name}</td>
                 <td className="text-start">{transaction.description}</td>
-                <td className="text-end">{transaction.debit>0? transaction.debit: ""}</td>
-                <td className="text-end">{transaction.credit>0? transaction.credit: ""}</td>
+                <td className="text-end">{transaction.debit>0? transaction.debit+" ৳": ""}</td>
+                <td className="text-end">{transaction.credit>0? transaction.credit+" ৳": ""}</td>
               </tr>
             ))}
           </tbody>
@@ -74,7 +74,7 @@ const Journals = () => {
                       acc + (Number(transaction.debit) || 0),
                     0
                   )
-                  .toFixed(2)}
+                  .toFixed(2)} ৳
               </td>
               <td className="text-end fw-bold">
                 {/* Ensure credit is a number */}
@@ -84,7 +84,7 @@ const Journals = () => {
                       acc + (Number(transaction.credit) || 0),
                     0
                   )
-                  .toFixed(2)}
+                  .toFixed(2)} ৳
               </td>
             </tr>
           </tfoot>

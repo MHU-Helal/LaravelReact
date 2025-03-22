@@ -11,11 +11,12 @@ import ServiceCRUD from './components/services/Service.jsx'
 import DummyInvoice from './components/Invoice/DummyInvoice.jsx'
 import Transaction from './components/account/Transaction.jsx'
 import Journals from './components/account/Journals.jsx'
+import TrialBalance from './components/account/TrialBalance.jsx'
+import ChartOfAccounts from './components/account/ChartOfAccounts .jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* <App /> */}
+
     <BrowserRouter>
       <Routes>
         <Route element={<MainPage/>}>
@@ -28,9 +29,9 @@ createRoot(document.getElementById('root')).render(
             <Route path='/patient' element={<PatientCRUD/>}/>
             <Route path='/doctor' element={<DoctorCRUD/>}/>
             <Route path='/service' element={<ServiceCRUD/>}/>
+            <Route path='/trialBalance' element={<TrialBalance/>}/>
+            <Route path='/ChartOfAccounts' element={<ChartOfAccounts/>}/>
         </Route>
-
       </Routes>
     </BrowserRouter>
-  </StrictMode>
 )
