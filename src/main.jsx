@@ -1,6 +1,5 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import MainPage from './pages/MainPage.jsx'
 import Dashboard from './layouts/Dashboard.jsx'
 import CreateInvoice from './components/account/CreateInvoice.jsx'
@@ -17,7 +16,7 @@ import ChartOfAccounts from './components/account/ChartOfAccounts .jsx'
 
 createRoot(document.getElementById('root')).render(
 
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route element={<MainPage/>}>
             <Route path='/' element={<Dashboard/>}/>
@@ -33,5 +32,5 @@ createRoot(document.getElementById('root')).render(
             <Route path='/ChartOfAccounts' element={<ChartOfAccounts/>}/>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
 )
