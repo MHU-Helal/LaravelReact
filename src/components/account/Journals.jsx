@@ -10,7 +10,7 @@ const Journals = () => {
   console.clear();
   useEffect(() => {
     axios
-      .get("http://localhost/LaravelTeamProject/public/api/journal") // Adjust the URL based on your API
+      .get("https://helal.devdelwar.com/laravel/public/api/journal") // Adjust the URL based on your API
       .then((response) => {
         setTransactions(response.data);
         console.log(transactions);

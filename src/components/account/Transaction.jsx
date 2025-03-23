@@ -8,7 +8,7 @@ const Transaction = () => {
   }]);
 
   useEffect(() => {
-    axios.get('http://localhost/LaravelTeamProject/public/api/accounts')
+    axios.get('https://helal.devdelwar.com/laravel/public/api/accounts')
       .then(resp => {
         console.clear();
         // console.log(resp.data);
@@ -45,7 +45,7 @@ const Transaction = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost/LaravelTeamProject/public/api/transactions', formData, {
+    axios.post('https://helal.devdelwar.com/laravel/public/api/transactions', formData, {
       headers:{
         'Content-Type': 'application/json',
       }

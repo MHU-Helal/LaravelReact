@@ -12,7 +12,7 @@ const TrialBalance = ({ startDate, endDate }) => {
     //  console.clear();
       useEffect(() => {
         axios
-          .get("http://localhost/LaravelTeamProject/public/api/trialBalance") // Adjust the URL based on your API
+          .get("https://helal.devdelwar.com/laravel/public/api/trialBalance") // Adjust the URL based on your API
           .then((response) => {
             setTrialBalance(response.data);
             console.log(response.data);

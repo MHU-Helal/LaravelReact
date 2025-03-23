@@ -11,7 +11,7 @@ const ChartOfAccounts = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost/LaravelTeamProject/public/api/chartOfAccounts") // Adjust the URL based on your API
+            .get("https://helal.devdelwar.com/laravel/public/api/chartOfAccounts") // Adjust the URL based on your API
             .then((response) => {
                 setGroups(response.data);
                 console.log(response.data);
